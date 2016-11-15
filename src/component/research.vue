@@ -5,7 +5,7 @@
     <br>
     <span>this is a one second increase one number:</span>
     <span>{{adds}}</span>
-    <button type="button" name="button" @click="add">点击</button>
+    <button type="button" name="button" @click="add" >点击</button>
   </div>
 </template>
 

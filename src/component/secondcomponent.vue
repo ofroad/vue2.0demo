@@ -5,16 +5,21 @@
       <div slot="header" class="clearfix">
         <h1 style="line-height: 36px; color: #20A0FF">豆瓣电影排行榜</h2>
       </div>
-      <div v-for="(article,index) in articles" class="text item">
+      <div class="listText">
+<div class="loading" v-loading="loading" element-loading-text="拼命加载中,请客官稍等">
+
+</div>
+      <div v-for="(article,index) in articles" class="text item" >
         <div class="text item" v-show="(index>=pageSize*(currentPage-1))&&(index<pageSize*currentPage)?true:false">
-          <a :href="article.alt">{{index}}-{{article.title}}</a>
+          <a :href="article.alt">Top{{index}}-{{article.title}}</a>
         </div>
       </div>
+
+    </div>
       <div class="block">
-    <span class="demonstration">显示总数</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="currentPage"
       :page-size="pageSize"
       layout="total, prev, pager, next"
@@ -27,7 +32,6 @@
 </template>
 
 <script>
-
 export default {
 
   data() {
@@ -39,7 +43,8 @@ export default {
       list:[],
       pageSize:10,
       currentPage:1,
-show:true
+      loading: true,
+      show:true
 
     }
   },
@@ -51,13 +56,13 @@ show:true
         emulateJSON: true
     }).then(function(response) {
       // 这里是处理正确的回调
+      console.log(response);
+      this.loading=false;
       this.list=response.data.subjects
          this.articles=response.data.subjects
         //  this.count=list.length
 console.log(this.articles);
-
         // this.articles = response.data["subjects"] 也可以
-
     }, function(response) {
         // 这里是处理错误的回调
         console.log(response)
@@ -66,7 +71,6 @@ console.log(this.articles);
   methods:{
     handleSizeChange(val) {
       this.pageSize=val;
-
           console.log(`每页 ${val} 条`);
         },
     handleCurrentChange(val) {
@@ -85,5 +89,26 @@ console.log(this.articles);
 </script>
 
 <style>
-
+.item a{
+  color: #20A0FF;
+}
+.el-pagination{
+  margin: auto;
+}
+.text{
+  text-align: left;
+  margin:auto;
+  margin-top: 5px;
+}
+.listText{
+  height: 250px;
+}
+.loading{
+  position: relative;
+  margin: auto;
+  top: 60px;
+}
+.el-loading-spinner .el-loading-text{
+  color: black;
+}
 </style>

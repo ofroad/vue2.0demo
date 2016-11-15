@@ -1,30 +1,34 @@
 <template>
-  <div id="app2">
-    <img src="./assets/logo.png">
-    <h1>Hello App!</h1>
-    <firstcomponent></firstcomponent>
-    <research></research>
-    <drag></drag> 
-    <ul>
-        <li><router-link to="/first">点我跳转到第一页</router-link></li>
-        <li><router-link to="/second">点我跳转到第二页</router-link></li>
-      </ul>
-    <router-view class="view"></router-view>
+  <div class="body">
+    <headers></headers>
+    <div class="container">
+      <div class="list">
+          <list></list>
+      </div>
+      <div class="content">
+          <router-view class="view"></router-view>
+      </div>
+    <!-- <firstcomponent></firstcomponent>
+    <research></research> -->
+
+    </div>
   </div>
 </template>
 
 <script>
-import firstcomponent from './component/firstcomponent.vue'
-import secondcomponent from './component/secondcomponent.vue'
-import research from './component/research.vue'
-import drag from './component/drag.vue'
+// import firstcomponent from './component/firstcomponent.vue'
+// import secondcomponent from './component/secondcomponent.vue'
+// import research from './component/research.vue'
+import list from './component/list.vue'
+import headers from './component/header.vue'
+// import drag from './component/drag.vue'
 export default {
   data () {
     return {
       msg: 'Hello Vue!'
     }
   },
-  components: { firstcomponent, secondcomponent,research,drag }
+  components: { list,headers }
 }
 
 
@@ -33,5 +37,22 @@ export default {
 <style>
 body {
   font-family: Helvetica, sans-serif;
+
 }
+.container{
+  display: flex;
+  /*justify-content:space-around;*/
+}
+.list{
+  width: 200px;
+  height: 100%;
+  border-right: 1px solid black;
+}
+.content{
+  width: 60%;
+
+  margin-left: 20px;
+  margin: auto;
+}
+
 </style>
